@@ -1,0 +1,88 @@
+# Spider Chemosensation — *Argiope bruennichi* CR Gene Repository
+
+> Companion repository to **Montes-Ortiz et al.** — *Receptor expansion and appendage specialization reveal extensive complexity in spider chemosensation*
+
+---
+
+## Overview
+
+This repository contains all scripts used for the identification, curation, and expression profiling of chemosensory receptor (CR) gene families in the wasp spider *Argiope bruennichi*. It covers four CR families: ionotropic glutamate receptors / ionotropic receptors (IRs/iGluRs), gustatory receptors (GRs), transient receptor potential channels (TRPs), and pickpocket receptors (PPKs).
+
+---
+
+## Repository Structure
+
+```
+.
+├── General analysis/
+│   ├── 01_transcriptome_assembly/     # QC, trimming, genome-guided and de novo assembly
+│   ├── 02_cr_annotation/              # InterProScan, BLAST, domain-based curation
+│   ├── 03_phylogenetics/              # MAFFT alignment, IQ-TREE, iTOL annotation
+│   ├── 04_chromosome_mapping/         # Miniprot mapping, MG2C visualization
+│   └── 05_expression/                 # Kallisto quantification, DESeq2 analysis
+│
+├── misc/
+│   └── data_management/               # Utility scripts for file handling, format conversion
+│                                      # and data cleaning (e.g. KallistoToDeseq2.py)
+│
+├── guide/
+│   └── analysis_walkthrough.md        # Step-by-step guide to reproduce the full analysis
+│
+└── README.md
+```
+
+---
+
+## Analysis Modules
+
+| Step | Description | Language |
+|------|-------------|----------|
+| Transcriptome assembly | FastQC, TrimGalore, HISAT2, StringTie2, Trinity, BUSCO | Bash |
+| CR annotation | InterProScan, BLASTP/tBLASTn, CD-HIT, CLANS clustering | Bash / Python |
+| Phylogenetic analysis | MAFFT alignment, IQ-TREE tree inference, iTOL visualization | Bash |
+| Chromosome mapping | Miniprot, Samtools, MG2C | Bash |
+| Expression analysis | Kallisto quantification, DESeq2, z-score heatmaps, volcano plots | R / Python |
+
+---
+
+## Dependencies
+
+### Bioinformatics tools
+- FastQC v0.11.9
+- TrimGalore v0.6.1
+- Kraken2
+- HISAT2 v2.2.1 / STAR v2.7.11a
+- StringTie2 v2.1.4
+- Trinity v2.9.1
+- TransDecoder
+- CD-HIT
+- BUSCO v5.2.2 (`arachnida_odb10`)
+- InterProScan v5 (with Pfam, PANTHER, TMHMM, Phobius)
+- BLAST+
+- MAFFT v7
+- IQ-TREE2
+- Miniprot
+- Samtools v1.9
+- Kallisto v0.48.0
+
+### R packages
+- `DESeq2` v1.42.1
+- `ggplot2`
+- `pheatmap`
+
+---
+
+## Reference Genome
+
+All analyses are based on the chromosome-level *A. bruennichi* genome assembly:
+- **Accession:** GCA_947563725.1
+- **Reference:** Sheffer et al. (2021) *GigaScience*, https://doi.org/10.1093/gigascience/giaa148
+
+---
+
+## Citation
+
+If you use these scripts, please cite:
+
+> Montes-Ortiz Z, Löfstedt C, Uhl G, Zhang D-D. *Receptor expansion and appendage specialization reveal extensive complexity in spider chemosensation.* (in preparation)
+---
