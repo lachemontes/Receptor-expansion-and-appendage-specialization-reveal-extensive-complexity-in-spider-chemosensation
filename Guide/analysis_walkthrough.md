@@ -65,6 +65,10 @@ Six male and six female adult *A. bruennichi* were collected from Kargower Weg, 
 
 ## 2. Transcriptome Assembly
 
+> **A note on the structure of this workflow:** the leg data were analyzed first as a pilot, and the mouthpart and pedipalp datasets were incorporated later as the project expanded. **In an ideal world, all tissues would have been processed together from the start** — **which would have made the pipeline cleaner and avoided some redundancy in the scripts**. If you notice that certain steps appear more than once with slight variations, that is why. This is a very common situation in collaborative research projects, especially when the bioinformatic strategy is defined iteratively alongside the biological questions. **If you are going through something similar: you are not alone, and the pipeline still works.**
+
+> The analyses for this project were carried out across different HPC systems in Sweden. I started on **Uppmax** (Uppsala University), then moved to **Dardel** (KTH) and **COSMOS** (Lund University). Modules were loaded when already available on the cluster; otherwise they were installed via  **conda** . **That is why you will notice some discrepancies in how tools are loaded throughout this guide**.
+
 Two strategies were used in parallel to maximize transcript recovery: a **genome-guided assembly** with StringTie2 and a **de novo assembly** with Trinity. Both outputs were subsequently used as complementary resources for CR gene identification.
 
 ---
@@ -125,7 +129,7 @@ fi
 
 ---
 
-### 2.2 Adapter Trimming — TrimGalore & Cutadapt
+### 2.2 Adapter Trimming — TrimGalore & Cutadapt & Trimmomatic
 
 Low-quality regions and Illumina adapters were removed with TrimGalore v0.6.1. For mouthparts and pedipalps, an additional Cutadapt step was run to remove poly-A and poly-G tails — a second FastQC/MultiQC round was done afterwards to confirm their removal.
 
@@ -181,6 +185,9 @@ trim_galore -j 6 --illumina --paired "$r1" "$r2" --fastqc -o "$output_dir"
 cutadapt -j 6 -a "G{100}" -a "A{100}" -A "G{100}" -A "A{100}" \
   -o "${r1_output}" -p "${r2_output}" "${r1_input}" "${r2_input}"
 ```
+
+
+
 
 ---
 
